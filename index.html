@@ -106,5 +106,15 @@ function tweetFromUnity(text) {
 }
 </script>
 
+<script>
+  function showScreenshot(base64Image) {
+    const container = document.getElementById("screenshot-container");
+    container.innerHTML = "";
+    const img = document.createElement("img");
+    img.src = base64Image;
+    container.appendChild(img);
+  }
+</script>
+
 </body>
 </html>
