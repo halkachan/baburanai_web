@@ -96,14 +96,13 @@ function tweetFromUnity(text) {
   const appURL = "twitter://post?message=" + encodeURIComponent(text);
   const webURL = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
 
-  // Twitterアプリが存在するか試す（iOS Safari など一部のブラウザのみ対応）
-  const timeout = setTimeout(() => {
-    // アプリがなさそう → ブラウザへ
-    window.location.href = webURL;
-  }, 1000);
-
-  // アプリ起動トライ
+  // iOS SafariやAndroid Chromeでアプリを即時起動を試みる（ユーザー操作直後に反応する形）
   window.location.href = appURL;
+
+  // 失敗した場合、数秒後にweb版を開く（バックアップ）
+  setTimeout(() => {
+    window.location.href = webURL;
+  }, 1500); // 1〜1.5秒がベスト
 }
 </script>
 
