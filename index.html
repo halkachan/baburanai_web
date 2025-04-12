@@ -91,12 +91,20 @@
     document.body.appendChild(script);
   </script>
 
-<script> 
-  function tweetFromUnity(text) {
-    const encodedText = encodeURIComponent(text);
-    const url = "https://twitter.com/intent/tweet?text=" + encodedText;
-    window.location.href = url;
-  }
+<script>
+function tweetFromUnity(text) {
+  const appURL = "twitter://post?message=" + encodeURIComponent(text);
+  const webURL = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
+
+  // Twitterアプリが存在するか試す（iOS Safari など一部のブラウザのみ対応）
+  const timeout = setTimeout(() => {
+    // アプリがなさそう → ブラウザへ
+    window.location.href = webURL;
+  }, 1000);
+
+  // アプリ起動トライ
+  window.location.href = appURL;
+}
 </script>
 
 <script>
