@@ -77,17 +77,20 @@
       productVersion: "1.0",
     };
 
-    const script = document.createElement("script");
-    script.src = loaderUrl;
-    script.onload = () => {
-      createUnityInstance(document.querySelector("#unity-canvas"), config, (progress) => {
-        document.getElementById("loading").textContent = `読み込み中... ${Math.round(progress * 100)}%`;
-      }).then(() => {
-        document.getElementById("loading").style.display = "none";
-      }).catch((message) => {
-        alert("エラー：" + message);
-      });
-    };
+  const script = document.createElement("script");
+  script.src = loaderUrl;
+
+  script.onload = () => {
+    document.getElementById("loading").textContent = `読み込み中... 0%`;
+
+    createUnityInstance(document.querySelector("#unity-canvas"), config, (progress) => {
+      document.getElementById("loading").textContent = `読み込み中... ${Math.round(progress * 100)}%`;
+    }).then(() => {
+      document.getElementById("loading").style.display = "none";
+    }).catch((message) => {
+      alert("エラー：" + message);
+    });
+  };
     document.body.appendChild(script);
   </script>
 
