@@ -8,50 +8,59 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: #000;
       height: 100%;
       overflow: hidden;
     }
-    #unity-container {
+
+    #unity-canvas {
       width: 100%;
       height: 100%;
-      position: relative;
+      background: #000;
     }
-    canvas {
-      width: 100%;
-      height: 100%;
+
+    /* 📱 横画面をブロックするスタイル */
+    @media screen and (orientation: landscape) {
+      body::before {
+        content: "縦向きでプレイしてね！";
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        background: black;
+        color: white;
+        font-size: 24px;
+        font-family: sans-serif;
+        text-align: center;
+        padding: 2em;
+        box-sizing: border-box;
+      }
+
+      #unity-canvas {
+        display: none;
+      }
     }
-    #loading {
-      color: white;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: sans-serif;
-      font-size: 20px;
+
+    /* ✅ 縦画面で通常表示 */
+    @media screen and (orientation: portrait) {
+      body::before {
+        display: none;
+      }
+
+      #unity-canvas {
+        display: block;
+      }
     }
-    #screenshot-container {
-      position: absolute;
-      bottom: 300px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      pointer-events: auto;
-    }
-    #screenshot-container img {
-      max-width: 45vw;
-      max-height: 35vh;
-      border: 2px solid white;
-      display: block;
-      margin: 0 auto;
-    }
+
   </style>
 </head>
 <body>
   <canvas id="unity-canvas"></canvas>
   <div id="loading" style="position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);color:white;">読み込み中...</div>
-
-  <div id="screenshot-container"></div>
 
   <script>
     const buildUrl = "Build";
@@ -83,30 +92,11 @@
   </script>
 
 <script>
-  function showScreenshot(base64Image) {
-    const container = document.getElementById("screenshot-container");
-    container.innerHTML = "";
-    const img = document.createElement("img");
-    img.src = base64Image;
-    container.appendChild(img);
+  function tweetFromUnity(text) {
+    const encodedText = encodeURIComponent(text);
+    const url = "https://twitter.com/intent/tweet?text=" + encodedText;
+    window.open(url, "_blank");
   }
-</script>
-
-
-<script>
-function tweetFromUnity(text) {
-  const appURL = "twitter://post?message=" + encodeURIComponent(text);
-  const webURL = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
-
-  // Twitterアプリが存在するか試す（iOS Safari など一部のブラウザのみ対応）
-  const timeout = setTimeout(() => {
-    // アプリがなさそう → ブラウザへ
-    window.location.href = webURL;
-  }, 1000);
-
-  // アプリ起動トライ
-  window.location.href = appURL;
-}
 </script>
 
 </body>
