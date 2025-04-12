@@ -99,10 +99,7 @@ function tweetFromUnity(text) {
   // iOS SafariやAndroid Chromeでアプリを即時起動を試みる（ユーザー操作直後に反応する形）
   window.location.href = appURL;
 
-  // 失敗した場合、数秒後にweb版を開く（バックアップ）
-  setTimeout(() => {
-    window.location.href = webURL;
-  }, 1500); // 1〜1.5秒がベスト
+
 }
 </script>
 
