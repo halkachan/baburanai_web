@@ -51,11 +51,13 @@
     document.body.appendChild(script);
   </script>
 
-  <script>
-    function tweetFromUnity(text) {
-      const url = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
-      window.open(url, "_blank");
-    }
-  </script>
+<script>
+  function tweetFromUnity(text) {
+    const encodedText = encodeURIComponent(text);
+    const url = "https://twitter.com/intent/tweet?text=" + encodedText;
+    window.open(url, "_blank");
+  }
+</script>
+
 </body>
 </html>
