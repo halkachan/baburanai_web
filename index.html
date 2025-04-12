@@ -18,35 +18,27 @@
       background: #000;
     }
 
-    /* 📱 横画面をブロックするスタイル */
-@media screen and (orientation: landscape) and (max-width: 1024px) and (pointer: coarse) {
-  body::before {
-    content: "縦向きでプレイしてね！";
-    position: fixed;
-    z-index: 9999;
-    background: #000;
-    color: #fff;
-    font-size: 2em;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-}
-
-    /* ✅ 縦画面で通常表示 */
-    @media screen and (orientation: portrait) {
-      body::before {
+    /* 👇スマホ横向きのときだけ表示されるメッセージ */
+    @media screen and (orientation: landscape) and (max-width: 1024px) and (pointer: coarse) {
+      #unity-canvas {
         display: none;
       }
-
-      #unity-canvas {
-        display: block;
+      body::before {
+        content: "スマホは縦向きでプレイしてね！";
+        position: fixed;
+        z-index: 9999;
+        background: #000;
+        color: #fff;
+        font-size: 2em;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 1em;
       }
     }
-
   </style>
 </head>
 <body>
