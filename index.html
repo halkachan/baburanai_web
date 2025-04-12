@@ -18,6 +18,22 @@
       background: #000;
     }
 
+    #screenshot-container {
+      position: absolute;
+      bottom: 300px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      pointer-events: auto;
+    }
+    #screenshot-container img {
+      max-width: 45vw;
+      max-height: 35vh;
+      border: 2px solid white;
+      display: block;
+      margin: 0 auto;
+    }
+
     /* 👇スマホ横向きのときだけ表示されるメッセージ */
     @media screen and (orientation: landscape) and (max-width: 1024px) and (pointer: coarse) {
       #unity-canvas {
