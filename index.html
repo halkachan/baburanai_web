@@ -24,11 +24,13 @@
 
   <script>
     const buildUrl = "Build";
-    const loaderUrl = buildUrl + "/Build.loader.js";
+    const ts = new Date().getTime(); // キャッシュバスター
+
+    const loaderUrl = buildUrl + "/Build.loader.js?ts=" + ts;
     const config = {
-      dataUrl: buildUrl + "/Build.data",
-      frameworkUrl: buildUrl + "/Build.framework.js",
-      codeUrl: buildUrl + "/Build.wasm",
+      dataUrl: buildUrl + "/Build.data?ts=" + ts,
+      frameworkUrl: buildUrl + "/Build.framework.js?ts=" + ts,
+      codeUrl: buildUrl + "/Build.wasm?ts=" + ts,
       streamingAssetsUrl: "StreamingAssets",
       companyName: "DefaultCompany",
       productName: "baburanai",
@@ -47,15 +49,13 @@
       });
     };
     document.body.appendChild(script);
-
   </script>
-<script>
-  function tweetFromUnity(text) {
-    const url = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
-    window.open(url, "_blank");
-  }
-</script>
 
-
+  <script>
+    function tweetFromUnity(text) {
+      const url = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
+      window.open(url, "_blank");
+    }
+  </script>
 </body>
 </html>
